@@ -15,9 +15,18 @@ const api = {
 		url: `/api/user/userInfo`,
 		method: 'get',
 	},
+	editUserInfo: {
+		url: `/api/user/editUserInfo`,
+		method: 'POST',
+	},
 	support: {
 		url: `/api/post/support`,
 		method: 'POST',
+	},
+	upload: {
+		url: `/api/utils/upload`,
+		method: 'POST',
+		headers: { 'Content-Type': 'multipart/form-data' }
 	},
 }
 export default api

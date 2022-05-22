@@ -7,7 +7,7 @@
         <!-- <a-breadcrumb-item>List</a-breadcrumb-item>
         <a-breadcrumb-item>App</a-breadcrumb-item> -->
       </a-breadcrumb>
-      <div :style="{ background: '#fff', padding: '24px'}">
+      <div :style="{ background: '#fff' }">
         <nuxt/>
       </div>
     </a-layout-content>

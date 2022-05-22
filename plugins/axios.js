@@ -3,7 +3,7 @@ import apiEntire from "@/api";
 
 export default ({ app, $axios, $cookies, redirect }, inject) => {
   $axios.defaults.baseURL = "http://127.0.0.1:2000";
-  $axios.defaults.timeout = 5000;
+  $axios.defaults.timeout = 10000;
 
   $axios.interceptors.request.use(config => {
       if($cookies.get('token')){

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="index">
     <postItem v-for="item in postList" :key="item.id" :postInfo="item" />
   </div>
 </template>
@@ -45,3 +45,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+.index {
+  padding: 24px
+}
+</style>

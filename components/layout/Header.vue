@@ -13,8 +13,11 @@
             <div class="iconfont icon-config pointer" style="color: #fff;line-height: normal;"></div>
           </a>
           <a-menu slot="overlay">
+            <a-menu-item v-if="hasLogin">
+              <nuxt-link to="/user">个人设置</nuxt-link>
+            </a-menu-item>
             <a-menu-item @click="logout">
-              <a href="javascript:;">{{hasLogin ? '退出登录' : '登录'}}</a>
+              <a>{{hasLogin ? '退出登录' : '登录'}}</a>
             </a-menu-item>
           </a-menu>
         </a-dropdown>

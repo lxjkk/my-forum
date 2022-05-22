@@ -1,7 +1,7 @@
 <template>
   <div class="post-item">
       <div class="item-title">
-          <nuxt-link class="link" to="/"><h2 v-text="postInfo.title"></h2></nuxt-link>
+          <nuxt-link class="link" to="/"><h2><span v-text="postInfo.title"></span></h2></nuxt-link>
       </div>
       <div class="post-content">
           <span>{{postInfo.content | str}}</span>
@@ -87,7 +87,7 @@ export default {
             margin-bottom: 0;
             overflow: hidden;
             white-space: nowrap;
-            &:hover {
+            span &:hover {
                 color: #334454;
             }
         }
