@@ -48,6 +48,6 @@ export default {
 
 <style lang="less" scoped>
 .index {
-  padding: 24px
+  padding: 0 16px
 }
 </style>

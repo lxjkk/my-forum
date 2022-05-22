@@ -2,7 +2,7 @@
   <div class="container">
       <div class="background" :style="{backgroundImage: `url(${background})`}">
         <div class="img">
-            <img class="avatar" src="https://tvax1.sinaimg.cn/crop.0.0.751.751.180/0075YT79ly8fpcl4wyovfj30kv0kv0tl.jpg?KID=imgbed,tva&Expires=1653140776&ssig=wYMlzzDiht" alt="">
+            <img class="avatar" :src="userInfo.avatar" alt="">
             <nuxt-link class="edit" to="/user/setting">修改资料</nuxt-link>
         </div>
       </div>
@@ -13,7 +13,11 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
+    computed: {
+        ...mapState(['userInfo', 'hasLogin'])
+    },
     data() {
         return {
             background: 'https://s1.hdslb.com/bfs/static/account-fe/static/img/rl_top.35edfde.png'
