@@ -22,7 +22,7 @@ $axios.interceptors.response.use(response => {
             response.data.code === 202 && $cookies.remove('LC-Token')
     }
     if (response.data.token) {
-        $cookies.set('LC-Token',response.data.token)
+        $cookies.set('LC-Token',response.data.token, { expires: 7 })
     }
     return Promise.resolve(response.data)
 },err=> {

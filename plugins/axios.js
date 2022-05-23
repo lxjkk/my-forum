@@ -22,7 +22,7 @@ export default ({ app, $axios, $cookies, redirect }, inject) => {
               response.data.code === 202 && $cookies.remove('LC-Token')
       }
       if (response.data.token) {
-        $cookies.set('LC-Token',response.data.token)
+        $cookies.set('LC-Token',response.data.token, { maxAge: 60 * 60 * 24 * 7 })
       }
       return Promise.resolve(response.data)
   },err=> {

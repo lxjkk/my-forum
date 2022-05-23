@@ -1,5 +1,6 @@
 <template>
     <a-layout-header class="header">
+      <div class="main">
       <div class="logo">
         <nuxt-link to="/">我的logo</nuxt-link>
       </div>
@@ -21,6 +22,7 @@
             </a-menu-item>
           </a-menu>
         </a-dropdown>
+      </div>
       </div>
     </a-layout-header>
 </template>
@@ -59,8 +61,13 @@ body {
   position: fixed;
   z-index: 1;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
+  .main {
+    min-width: 768px;
+    max-width: 1440px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 .logo {
   width: 120px;
