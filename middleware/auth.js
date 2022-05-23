@@ -4,11 +4,11 @@ console.log("Hello, 全局鉴权", process.server);
  * nuxt.config.js router配置middleware: 'auth' 即可全局触发此鉴权
  */
 export default async function({ $api, store, $cookies }) {
-  if ($cookies.get("token")) {
+  if ($cookies.get("LC-Token")) {
     const res = await $api.getUserInfo();
     store.dispatch("updateUserInfo", res);
     if (res.code !== 200) {
-      $cookies.remove("token");
+      $cookies.remove("LC-Token");
     }
   }
 }

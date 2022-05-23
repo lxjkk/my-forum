@@ -14,7 +14,7 @@ export const mutations = {
     logout(state) {
         state.hasLogin = false;
         state.userInfo = {};
-        cookie.remove('token')
+        cookie.remove('LC-Token')
     },
 
 }

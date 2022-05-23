@@ -6,8 +6,8 @@ import Vue from "vue";
 $axios.defaults.baseURL = "http://127.0.0.1:2000";
 $axios.defaults.timeout = 10000;
 $axios.interceptors.request.use(config => {
-    if($cookies.get('token')){
-        config.headers['token'] = $cookies.get('token')
+    if($cookies.get('LC-Token')){
+        config.headers['token'] = $cookies.get('LC-Token')
     }
     return config
 },err=>{
@@ -19,10 +19,10 @@ $axios.interceptors.response.use(response => {
     if (response.data.code !== 200) {
             const p = new Vue()
             p.$message.error(response.data.msg);
-            response.data.code === 202 && $cookies.remove('token')
+            response.data.code === 202 && $cookies.remove('LC-Token')
     }
     if (response.data.token) {
-        $cookies.set('token',response.data.token)
+        $cookies.set('LC-Token',response.data.token)
     }
     return Promise.resolve(response.data)
 },err=> {
