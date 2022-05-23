@@ -1,5 +1,6 @@
 import Vue from "vue";
 import apiEntire from "@/api";
+// import axiosBasic from "~/utils/http";
 
 export default ({ app, $axios, $cookies, redirect }, inject) => {
   $axios.defaults.baseURL = "http://127.0.0.1:2000";
@@ -27,6 +28,7 @@ export default ({ app, $axios, $cookies, redirect }, inject) => {
   },err=> {
       return Promise.reject(err)
   })
+  // const axios = axiosBasic($axios, $cookies)
   const API = {};
   for (const i in apiEntire) {
     // 调用api时候的参数

@@ -1,3 +1,6 @@
+import api from '~/api'
+import request from '~/utils/http'
+import cookie from 'vue-cookies'
 export const state = () => ({
     userInfo: {}, // 个人信息
     hasLogin: false
@@ -11,6 +14,7 @@ export const mutations = {
     logout(state) {
         state.hasLogin = false;
         state.userInfo = {};
+        cookie.remove('token')
     },
 
 }
@@ -18,6 +22,9 @@ export const mutations = {
 export const actions = {
     // 存储用户配置
     async updateUserInfo({ commit }, res) {
+        if (!res) {
+            res = await request(api.getUserInfo)
+        }
         if (res.code === 200) {
             commit('saveUserInfo',res.data);
         } else {

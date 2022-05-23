@@ -40,7 +40,7 @@
     </a-form>
 
     <div class="edit">
-      <a-button type="primary" @click="sub">保存</a-button>
+      <a-button type="primary" :loading="loading" @click="sub">保存</a-button>
     </div>
   </div>
 </template>
@@ -50,7 +50,8 @@ import moment from 'moment'
 export default {
     data(){
         return {
-            form: {avatar: undefined, birthday: undefined, info: undefined, name: undefined, sex: null}
+            form: {avatar: undefined, birthday: undefined, info: undefined, name: undefined, sex: null},
+            loading: false
         }
     },
     mounted() {
@@ -89,11 +90,13 @@ export default {
             console.log(form.birthday);
             form.birthday  && (form.birthday = form.birthday.format('YYYY-MM-DD'))
             console.log(form);
+            this.loading = true
             this.$api.editUserInfo(form).then(res => {
+                this.loading = false
                 console.log(res);
                 if (res.code === 200) {
                     this.$message.success(res.msg)
-                    // this.
+                    this.$store.dispatch('updateUserInfo')
                 }
             })
         }

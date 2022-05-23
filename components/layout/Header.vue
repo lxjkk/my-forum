@@ -1,7 +1,7 @@
 <template>
     <a-layout-header class="header">
       <div class="logo">
-        我的logo
+        <nuxt-link to="/">我的logo</nuxt-link>
       </div>
 
       <div class="congfig">
@@ -14,7 +14,7 @@
           </a>
           <a-menu slot="overlay">
             <a-menu-item v-if="hasLogin">
-              <nuxt-link to="/user">个人设置</nuxt-link>
+              <nuxt-link to="/user">个人中心</nuxt-link>
             </a-menu-item>
             <a-menu-item @click="logout">
               <a>{{hasLogin ? '退出登录' : '登录'}}</a>

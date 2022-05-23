@@ -11,6 +11,10 @@ const api = {
 		url: `/api/post/getPost`,
 		method: 'get',
 	},
+	getPostInfo: {
+		url: `/api/post/getPostInfo`,
+		method: 'get',
+	},
 	getUserInfo: {
 		url: `/api/user/userInfo`,
 		method: 'get',

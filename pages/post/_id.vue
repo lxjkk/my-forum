@@ -1,41 +1,73 @@
 <template>
   <div class="content">
     <!-- 标题 -->
-    <h1 class="h1">缺爱的人，一下子就能看出来</h1>
+    <h1 class="h1">{{info.title}}</h1>
     <!-- 用户信息 -->
     <div class="user">
       <img
         class="avatar"
-        src="http://127.0.0.1:2000/static/images/photo/2022-5-1_D52BOYiJp9.png"
+        :src="info.avatar"
         alt=""
       />
       <div class="info">
-        <p>哈哈哈</p>
+        <p>{{info.name}}</p>
         <a-space class="detail">
-          <span>发布于：2022.01.28 21:22:99</span>
-          <span>阅读：N次</span>
+          <span>发布于：{{info.issue_time | moment}}</span>
+          <span>阅读：{{info.read_count}}次</span>
         </a-space>
       </div>
     </div>
     <!-- 内容 -->
-    <div class="html">xxxxx</div>
+    <div class="html" v-html="info.content"></div>
     <!-- 操作 -->
     <a-space class="handle">
-        <a-button type="dashed" shape="circle" icon="like" ghost size="large" />
-        <span class="count">1213人点赞</span>
+        <a-button :type="info.is_support ? 'primary' : 'dashed'" :loading="loading" shape="circle" icon="like" :ghost="!info.is_support" size="large" @click="support" />
+        <span class="count">{{info.support_count}}人点赞</span>
     </a-space>
   </div>
 </template>
 
 <script>
-export default {}
+import moment from "moment";
+export default {
+    async asyncData({$api, route}) {
+        const res = await $api.getPostInfo({id: route.params.id})
+        return {info: res.code === 200 ? res.data : {}}
+    },
+    filters: {
+        moment: (val) => val && moment(val).format('YYYY-MM-DD hh:ss:mm') || ''
+    },
+    data() {
+        return {
+            loading: false
+        }
+    },
+    methods: {
+        support() {
+            this.loading = true
+            this.$api.support({fid: this.info.id}).then((res) => {
+                this.loading = false
+                if (res.code === 200) {
+                    this.$message.success(res.data)
+                    if (this.info.is_support) {
+                        this.info.support_count -=1
+                        this.info.is_support = false
+                    } else {
+                        this.info.support_count +=1
+                        this.info.is_support = true
+                    }
+                }
+            })
+        }
+    }
+}
 </script>
 
 <style lang="less" scoped>
 .content {
   padding: 32px;
   .h1 {
-    margin-top: 32px;
+    margin-top: 12px;
     font-size: 30px;
     font-weight: 700;
   }

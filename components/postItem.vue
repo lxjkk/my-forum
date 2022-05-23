@@ -1,13 +1,13 @@
 <template>
   <div class="post-item">
       <a-space class="avatar">
-          <div class="avatar-content">
-            <img :src="postInfo.avatar || user">
-          </div>
-        <nuxt-link class="link" to="/"><span>{{postInfo.name}}</span></nuxt-link>
+            <div class="avatar-content">
+                <img :src="postInfo.avatar || user">
+            </div>
+            <nuxt-link class="link" :to="`/post/${postInfo.id}`"><span>{{postInfo.name}}</span></nuxt-link>
         </a-space>
       <div class="item-title">
-        <h2><nuxt-link class="link" to="/"><span v-text="postInfo.title"></span></nuxt-link></h2>
+        <h2><nuxt-link class="link" :to="`/post/${postInfo.id}`"><span v-text="postInfo.title"></span></nuxt-link></h2>
       </div>
       <div class="post-content">
           <span>{{postInfo.content | str}}</span>
@@ -132,7 +132,7 @@ export default {
             white-space: nowrap;
             span {
                 &:hover {
-                    color: #175199;
+                    color: #1890ff;
                 }
             }
         }

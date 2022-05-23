@@ -36,7 +36,7 @@ export default {
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       const windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
       const scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-      if (scrollTop + windowHeight>= scrollHeight - 20 && !this.isAchiveBottom && this.postList.length < this.postCount) {
+      if (scrollTop + windowHeight>= scrollHeight - 10 && !this.isAchiveBottom && this.postList.length < this.postCount) {
         this.isAchiveBottom = true;
         // 获取当前展示列表数据
         this.postApi()
@@ -48,6 +48,7 @@ export default {
 
 <style lang="less" scoped>
 .index {
-  padding: 0 16px
+  padding: 0 16px;
+  margin-bottom: 24px;
 }
 </style>

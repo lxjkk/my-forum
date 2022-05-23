@@ -2,7 +2,7 @@
   <div>
     <a-menu class="menu" :selectedKeys="selectedKeys" mode="inline" @select="onSelect">
       <a-menu-item v-for="item in menuList" :key="item.key">
-        <a-icon type="user" />
+        <a-icon :type="item.type" />
          {{item.name}}
       </a-menu-item>  
     </a-menu>
@@ -17,7 +17,7 @@ export default {
     data() {
         return {
             selectedKeys: [this.$route.path],
-            menuList: [{key:'/user', name: '个人中心'}, {key:'/user/setting', name: '我的信息'}]
+            menuList: [{key:'/user', name: '个人中心', type: 'home'}, {key:'/user/setting', name: '我的信息', type: 'user'}]
         }
     },
     watch: {
