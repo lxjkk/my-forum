@@ -66,6 +66,7 @@ export default {
 <style lang="less" scoped>
 .content {
   padding: 32px;
+  margin-bottom: 24px;
   .h1 {
     margin-top: 12px;
     font-size: 30px;
@@ -95,6 +96,9 @@ export default {
   .handle {
     margin-top: 32px;
     color: #969696;
+  }
+  .html {
+    font-size: 16px;
   }
 }
 /deep/ .ant-btn-background-ghost {

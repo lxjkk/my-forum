@@ -9,11 +9,14 @@
         <img class="pointer" v-if="hasLogin" :src="userInfo.avatar || user">
         <span class="text pointer" v-if="hasLogin">{{userInfo.name}}</span>
         <span class="text" v-else><span class="pointer" @click="toLogin(false)">登录</span>/<span class="pointer" @click="toLogin(true)">注册</span></span>
-        <a-dropdown>
+        <a-dropdown placement="bottomRight">
           <a class="ant-dropdown-link" @click="e => e.preventDefault()">
             <div class="iconfont icon-config pointer" style="color: #fff;line-height: normal;"></div>
           </a>
           <a-menu slot="overlay">
+            <a-menu-item v-if="hasLogin">
+              <nuxt-link to="/publish">发布帖子</nuxt-link>
+            </a-menu-item>
             <a-menu-item v-if="hasLogin">
               <nuxt-link to="/user">个人中心</nuxt-link>
             </a-menu-item>

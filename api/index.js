@@ -32,5 +32,9 @@ const api = {
 		method: 'POST',
 		headers: { 'Content-Type': 'multipart/form-data' }
 	},
+	postPublish: {
+		url: `/api/user/post`,
+		method: 'POST',
+	},
 }
 export default api
