@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <a-menu class="menu" :selectedKeys="selectedKeys" mode="inline" @select="onSelect">
       <a-menu-item v-for="item in menuList" :key="item.key">
         <a-icon :type="item.type" />
@@ -34,6 +34,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.main {
+    background: #fff;
+}
 .menu {
     display: inline-block;
     width: 165px;

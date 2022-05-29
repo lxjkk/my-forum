@@ -73,6 +73,7 @@ export default {
 
 <style lang="less" scoped>
 .content {
+  background: #fff;
   padding: 0 16px 16px;
 }
 .handle {

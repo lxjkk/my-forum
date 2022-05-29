@@ -56,10 +56,7 @@ export default {
 }
 </script>
 
-<style lang="less">
-body {
-    background-color: #f0f2f5;
-}
+<style lang="less" scoped>
 .header {
   position: fixed;
   z-index: 1;
@@ -96,5 +93,11 @@ body {
     .text {
       margin-right: 10px;
     }
+}
+</style>
+<style>
+body {
+  line-height: 1.42857;
+    background-color: #f0f2f5;
 }
 </style>

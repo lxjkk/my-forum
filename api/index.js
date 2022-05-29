@@ -36,5 +36,17 @@ const api = {
 		url: `/api/user/post`,
 		method: 'POST',
 	},
+	getComment: {
+		url: `/api/post/getComment`,
+		method: 'get',
+	},
+	postComment: {
+		url: `/api/user/comment`,
+		method: 'POST',
+	},
+	postReply: {
+		url: `/api/user/reply`,
+		method: 'POST',
+	},
 }
 export default api
