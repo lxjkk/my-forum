@@ -1,13 +1,13 @@
 <template>
   <div class="container">
-      <div class="background" :style="{backgroundImage: `url(${background})`}">
+      <div class="background" :style="background">
         <div class="img">
             <img class="avatar" :src="userInfo.avatar" alt="">
             <nuxt-link class="edit" to="/user/setting">修改资料</nuxt-link>
         </div>
       </div>
-      <div>
-          .....
+      <div class="main">
+          <p class="info" v-if="userInfo.info">简介：{{userInfo.info}}</p>
       </div>
   </div>
 </template>
@@ -16,11 +16,18 @@
 import {mapState} from 'vuex'
 export default {
     computed: {
-        ...mapState(['userInfo', 'hasLogin'])
+        ...mapState(['userInfo', 'hasLogin']),
+        background() {
+            const obj = {
+                1: 'background: #409EFF',
+                2: 'background: #F56C6C',
+                3: 'background-image: linear-gradient(140deg, #409EFF 0%, #F56C6C 100%);'
+            }
+            return obj[this.userInfo.sex] || obj[3]
+        }
     },
     data() {
         return {
-            background: 'https://s1.hdslb.com/bfs/static/account-fe/static/img/rl_top.35edfde.png'
         }
     }
 }
@@ -70,6 +77,12 @@ export default {
         left: 0;
         background-color: rgba(0,0,0,.66);
         color: #fff;
+    }
+    .main {
+        padding: 20px;
+        .info {
+            text-align: center;
+        }
     }
 }
 </style>

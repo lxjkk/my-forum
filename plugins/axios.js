@@ -3,7 +3,8 @@ import apiEntire from "@/api";
 // import axiosBasic from "~/utils/http";
 
 export default ({ app, $axios, $cookies, redirect }, inject) => {
-  $axios.defaults.baseURL = "http://127.0.0.1:2000";
+  console.log(process.env.baseUrl, 11111);
+  $axios.defaults.baseURL = process.env.baseUrl;
   $axios.defaults.timeout = 10000;
 
   $axios.interceptors.request.use(config => {
@@ -17,8 +18,11 @@ export default ({ app, $axios, $cookies, redirect }, inject) => {
 
   $axios.interceptors.response.use(response => {
       if (response.data.code !== 200) {
-              const p = new Vue()
-              p.$message.error(response.data.msg);
+              if (process.client) {
+                const p = new Vue()
+                p.$message.error(response.data.msg);
+              } 
+              console.log(response.data.code, $cookies.get('LC-Token'));
               response.data.code === 202 && $cookies.remove('LC-Token')
       }
       if (response.data.token) {

@@ -5,7 +5,11 @@
 </template>
 
 <script>
+import postItem from '~/components/postItem'
 export default {
+  components: {
+    postItem
+  },
   async asyncData({$api}) {
     const res = await $api.getPost({page:1,limit:10})
     return {postList: res.data.list, postCount: res.data.count, form: {page:2,limit:10}}

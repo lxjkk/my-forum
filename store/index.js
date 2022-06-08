@@ -1,6 +1,5 @@
 import api from '~/api'
 import request from '~/utils/http'
-import cookie from 'vue-cookies'
 export const state = () => ({
     userInfo: {}, // 个人信息
     hasLogin: false
@@ -14,7 +13,7 @@ export const mutations = {
     logout(state) {
         state.hasLogin = false;
         state.userInfo = {};
-        cookie.remove('LC-Token')
+        this.$cookies.remove('LC-Token')
     },
 
 }

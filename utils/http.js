@@ -2,8 +2,8 @@
 import $axios from 'axios'
 import $cookies from 'vue-cookies'
 import Vue from "vue";
-
-$axios.defaults.baseURL = "http://127.0.0.1:2000";
+console.log(11111111, process.env.baseUrl);
+$axios.defaults.baseURL = process.env.baseUrl;
 $axios.defaults.timeout = 10000;
 $axios.interceptors.request.use(config => {
     if($cookies.get('LC-Token')){

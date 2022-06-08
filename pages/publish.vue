@@ -28,7 +28,7 @@ export default {
   mounted() {
     this.editor = new $wangeditor('#editor')
     this.editor.config.showLinkImg = false
-    this.editor.config.uploadImgServer = 'http://127.0.0.1:2000/api/utils/upload'
+    this.editor.config.uploadImgServer = process.env.baseUrl + '/api/utils/upload'
     this.editor.config.uploadImgHeaders = {
         'token': $cookies.get('LC-Token')
     }
