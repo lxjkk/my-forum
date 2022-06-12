@@ -41,7 +41,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
-  // 关掉 Are you interested in participation 
+  // 关掉 Are you interested in participation
   telemetry: false,
 
   // Modules: https://go.nuxtjs.dev/config-modules
