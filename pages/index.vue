@@ -53,7 +53,6 @@ export default {
 <style lang="less" scoped>
 .index {
   background: #fff;
-  padding: 0 16px;
   margin-bottom: 24px;
 }
 </style>

@@ -116,7 +116,7 @@ export default {
     }
 }
 .post-item {
-    padding: 20px 0;
+    padding: 20px 16px;
     background: #fff;
     border-bottom: 1px solid #f6f6f6;
     position: relative;
