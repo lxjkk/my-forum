@@ -10,7 +10,7 @@
         <h2><nuxt-link class="link" :to="`/post/${postInfo.id}`"><span v-text="postInfo.title"></span></nuxt-link></h2>
       </div>
       <div class="post-content">
-          <span>{{postInfo.content | str}}</span>
+          <span>{{postInfo.describe}}</span>
       </div>
       <div class="item-text-bar">
           <div class="flex-align">
@@ -38,11 +38,6 @@ export default {
         postInfo: {
             type: Object,
             default: {}
-        }
-    },
-    filters: {
-        str(e) {
-            return e && e.replace(/<[^>]+>/g,"");
         }
     },
     data() {
