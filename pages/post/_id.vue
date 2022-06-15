@@ -121,7 +121,7 @@ export default {
     // return { info: res.code === 200 ? res.data : {} }
   },
   filters: {
-    moment: (val) => (val && moment(val).format('YYYY-MM-DD hh:ss:mm')) || ''
+    moment: (val) => (val && moment(val).format('YYYY-MM-DD HH:ss:mm')) || ''
   },
   data() {
     return {
