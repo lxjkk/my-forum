@@ -19,8 +19,8 @@ export default {
         ...mapState(['userInfo', 'hasLogin']),
         background() {
             const obj = {
-                1: 'background: #409EFF',
-                2: 'background: #F56C6C',
+                1: 'background-image: linear-gradient(140deg, #409EFF 0%, #FFF 100%);',
+                2: 'background-image: linear-gradient(140deg, #FFF 0%, #F56C6C 100%);',
                 3: 'background-image: linear-gradient(140deg, #409EFF 0%, #F56C6C 100%);'
             }
             return obj[this.userInfo.sex] || obj[3]
