@@ -8,8 +8,8 @@
       <div class="congfig">
         <a-space v-if="hasLogin">
           <a-button type="dashed" ghost @click="$router.push('/publish')">发布</a-button>
-          <img class="pointer" v-if="hasLogin" :src="userInfo.avatar || user">
-          <span class="text pointer">{{userInfo.name}}</span>
+          <img class="pointer" @click="$router.push('/user')" v-if="hasLogin" :src="userInfo.avatar || user">
+          <span class="text">{{userInfo.name}}</span>
         </a-space>
         
         <span class="text" v-else><span class="pointer" @click="toLogin(false)">登录</span>/<span class="pointer" @click="toLogin(true)">注册</span></span>
