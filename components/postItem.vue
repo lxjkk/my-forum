@@ -10,7 +10,7 @@
         <h2><nuxt-link class="link" :to="`/post/${postInfo.id}`"><span v-text="postInfo.title"></span></nuxt-link></h2>
       </div>
       <div class="post-content">
-          <span>{{postInfo.describe}}</span>
+          <span>{{postInfo.describes}}</span>
       </div>
       <div class="item-text-bar">
           <div class="flex-align">
