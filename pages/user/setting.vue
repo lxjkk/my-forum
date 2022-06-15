@@ -64,10 +64,8 @@ export default {
     methods: {
         async fileChange(e) {
             console.log(e.file);
-            const data = await this.getPictureBase64(e.file.originFileObj)
             const formData = new FormData()
             formData.append('file', e.file.originFileObj)
-            formData.append('base64Data', data)
             console.log(formData);
             this.$api.upload(formData).then(res => {
                 if (res.code === 200) {

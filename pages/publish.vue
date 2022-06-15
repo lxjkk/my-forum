@@ -35,10 +35,8 @@ export default {
     const that = this
     this.editor.config.customUploadImg = function (resultFiles, insertImgFn) {
         resultFiles.forEach(async item => {
-            const data = await that.getPictureBase64(item)
             const formData = new FormData()
             formData.append('file', item)
-            formData.append('base64Data', data)
             const res = await that.$api.upload(formData)
             if (res.code === 200) {
                 insertImgFn(res.data)
