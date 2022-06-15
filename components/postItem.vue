@@ -10,7 +10,10 @@
         <h2><nuxt-link class="link" :to="`/post/${postInfo.id}`"><span v-text="postInfo.title"></span></nuxt-link></h2>
       </div>
       <div class="post-content">
-          <span>{{postInfo.describes}}</span>
+          <div class="img" v-if="postInfo.image">
+              <img @click="$router.push(`/post/${postInfo.id}`)" :src="postInfo.image" alt="">
+          </div>
+          <span><nuxt-link class="content" :to="`/post/${postInfo.id}`">{{postInfo.describes}}</nuxt-link></span>
       </div>
       <div class="item-text-bar">
           <div class="flex-align">
@@ -116,13 +119,12 @@ export default {
     border-bottom: 1px solid #f6f6f6;
     position: relative;
     .item-title {
-        margin-bottom: 4px;
+        margin-bottom: 6px;
         h2 {
             font-size: 18px;
             font-weight: bold;
-            line-height: 24px;
-            height: 24px;
             margin-bottom: 0;
+            line-height: 1.6;
             overflow: hidden;
             white-space: nowrap;
             span {
@@ -133,17 +135,32 @@ export default {
         }
     }
     .post-content {
-        color: #121212;
         font-size: 15px;
-        line-height: 24px;
+        line-height: 1.67;
         display: -webkit-box;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         white-space: normal;
         overflow: hidden;
-        cursor: pointer;
-        &:hover {
-            color: #646464;
+        .img {
+            cursor: pointer;
+            width: 190px;
+            height: 100px;
+            margin-right: 18px;
+            float: left;
+            border-radius: 4px;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .content {
+            color: #121212;
+            &:hover {
+                color: #646464;
+            }
         }
     }
     .item-text-bar {
