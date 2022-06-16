@@ -24,6 +24,9 @@ export default {
 </script>
 
 <style lang="less">
+#components-layout-demo-fixed {
+  background-image: url('~/static/image/bg.png');
+}
  .layout-content {
   background: #fff;
   width: 960px;

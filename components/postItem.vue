@@ -1,36 +1,39 @@
 <template>
   <div class="post-item">
-      <a-space class="avatar">
+      <template v-if="!loading">
+        <a-space class="avatar">
             <div class="avatar-content">
                 <img :src="postInfo.avatar || user">
             </div>
             <nuxt-link class="link" :to="`/post/${postInfo.id}`"><span>{{postInfo.name}}</span></nuxt-link>
         </a-space>
-      <div class="item-title">
-        <h2><nuxt-link class="link" :to="`/post/${postInfo.id}`"><span v-text="postInfo.title"></span></nuxt-link></h2>
-      </div>
-      <div class="post-content">
-          <div class="img" v-if="postInfo.image">
-              <img @click="$router.push(`/post/${postInfo.id}`)" :src="postInfo.image" alt="">
-          </div>
-          <span><nuxt-link class="content" :to="`/post/${postInfo.id}`">{{postInfo.describes}}</nuxt-link></span>
-      </div>
-      <div class="item-text-bar">
-          <div class="flex-align">
-              <div class="flex-align span" :class="postInfo.is_support && 'action'" @click="support">
-                  <span class="iconfont icon-sup"></span>
-                  <span>{{postInfo.support_count}}</span>
-              </div>
-              <div class="flex-align span">
-                  <span class="iconfont icon-view"></span>
-                  <span>{{postInfo.read_count}}</span>
-              </div>
-              <!-- <div class="flex-align span">
-                  <span class="iconfont icon-news"></span>
-                  <span>{{postInfo.support_count}}</span>
-              </div> -->
-          </div>
-      </div>
+        <div class="item-title">
+            <h2><nuxt-link class="link" :to="`/post/${postInfo.id}`"><span v-text="postInfo.title"></span></nuxt-link></h2>
+        </div>
+        <div class="post-content">
+            <div class="img" v-if="postInfo.image">
+                <img @click="$router.push(`/post/${postInfo.id}`)" :src="postInfo.image" alt="">
+            </div>
+            <span><nuxt-link class="content" :to="`/post/${postInfo.id}`">{{postInfo.describes}}</nuxt-link></span>
+        </div>
+        <div class="item-text-bar">
+            <div class="flex-align">
+                <div class="flex-align span" :class="postInfo.is_support && 'action'" @click="support">
+                    <span class="iconfont icon-sup"></span>
+                    <span>{{postInfo.support_count}}</span>
+                </div>
+                <div class="flex-align span">
+                    <span class="iconfont icon-view"></span>
+                    <span>{{postInfo.read_count}}</span>
+                </div>
+                <!-- <div class="flex-align span">
+                    <span class="iconfont icon-news"></span>
+                    <span>{{postInfo.support_count}}</span>
+                </div> -->
+            </div>
+        </div>
+      </template>
+      <a-skeleton v-else avatar :paragraph="{ rows: 3 }" />
   </div>
 </template>
 
@@ -40,7 +43,11 @@ export default {
     props: {
         postInfo: {
             type: Object,
-            default: {}
+            default: () => {}
+        },
+        loading: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
