@@ -40,6 +40,7 @@
 
 <script>
 import user from '~/assets/img/user.png'
+
 export default {
     props: {
         postInfo: {
