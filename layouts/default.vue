@@ -24,12 +24,17 @@ export default {
 </script>
 
 <style lang="less">
-#components-layout-demo-fixed {
-  background-image: url('~/static/image/bg.png');
-}
+  #components-layout-demo-fixed {
+    background: none;
+  }
  .layout-content {
   background: #fff;
   width: 960px;
   margin: 0 auto;
  }
+</style>
+<style>
+  body {
+  background-image: url('~/static/image/bg.png');
+}
 </style>

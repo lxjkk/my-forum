@@ -101,6 +101,6 @@ export default {
 <style>
 body {
   line-height: 1.42857;
-    background-color: #f0f2f5;
+
 }
 </style>

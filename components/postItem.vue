@@ -5,7 +5,8 @@
             <div class="avatar-content">
                 <img :src="postInfo.avatar || user">
             </div>
-            <nuxt-link class="link" :to="`/post/${postInfo.id}`"><span>{{postInfo.name}}</span></nuxt-link>
+            <span class="link">{{postInfo.name}}</span>
+            <!-- <nuxt-link class="link" :to="`/post/${postInfo.id}`"></nuxt-link> -->
         </a-space>
         <div class="item-title">
             <h2><nuxt-link class="link" :to="`/post/${postInfo.id}`"><span v-text="postInfo.title"></span></nuxt-link></h2>
@@ -33,7 +34,7 @@
             </div>
         </div>
       </template>
-      <a-skeleton v-else avatar :paragraph="{ rows: 3 }" />
+      <a-skeleton v-else avatar active :paragraph="{ rows: 3 }" />
   </div>
 </template>
 
