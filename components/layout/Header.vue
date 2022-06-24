@@ -6,20 +6,20 @@
       </div>
 
       <div class="congfig">
+        <a-auto-complete style="width: 320px;margin-right: 12px" option-label-prop="title" @select="onSelect" @search="handleSearch" placeholder="搜索"  ref="input">
+          <template slot="dataSource">
+            <a-select-option v-for="(item,index) in dataSource" :key="item.id+ ''" :title="item.title">
+              <span><span :class="index < 3 && `hot${index + 1}`">{{index + 1}}. </span>{{item.title}}</span>
+              <p class="hint">{{item.describes}}</p>
+            </a-select-option>
+          </template>
+          <a-input>
+          <a-button slot="suffix" style="margin-right: -12px" type="primary" @click="handleSearch">
+              <a-icon type="search" />
+            </a-button>
+          </a-input>
+        </a-auto-complete>
         <a-space v-if="hasLogin">
-          <a-auto-complete style="width: 320px" option-label-prop="title" @select="onSelect" @search="handleSearch" placeholder="搜索"  ref="input">
-            <template slot="dataSource">
-              <a-select-option v-for="(item,index) in dataSource" :key="item.id+ ''" :title="item.title">
-                <span><span :class="index < 3 && `hot${index + 1}`">{{index + 1}}. </span>{{item.title}}</span>
-                <p class="hint">{{item.describes}}</p>
-              </a-select-option>
-            </template>
-            <a-input>
-            <a-button slot="suffix" style="margin-right: -12px" type="primary" @click="handleSearch">
-                <a-icon type="search" />
-              </a-button>
-            </a-input>
-          </a-auto-complete>
           <a-button type="dashed" ghost @click="$router.push('/publish')">发布</a-button>
           <img class="pointer" @click="$router.push('/user')" v-if="hasLogin" :src="userInfo.avatar || user">
           <span class="text">{{userInfo.name}}</span>

@@ -16,4 +16,4 @@ const data = {
 		method: 'POST',
 	},
 }
-module.exports = data
+export default data
