@@ -7,6 +7,19 @@
 
       <div class="congfig">
         <a-space v-if="hasLogin">
+          <a-auto-complete style="width: 320px" option-label-prop="title" @select="onSelect" @search="handleSearch" placeholder="搜索"  ref="input">
+            <template slot="dataSource">
+              <a-select-option v-for="(item,index) in dataSource" :key="item.id+ ''" :title="item.title">
+                <span><span :class="index < 3 && `hot${index + 1}`">{{index + 1}}. </span>{{item.title}}</span>
+                <p class="hint">{{item.describes}}</p>
+              </a-select-option>
+            </template>
+            <a-input>
+            <a-button slot="suffix" style="margin-right: -12px" type="primary" @click="handleSearch">
+                <a-icon type="search" />
+              </a-button>
+            </a-input>
+          </a-auto-complete>
           <a-button type="dashed" ghost @click="$router.push('/publish')">发布</a-button>
           <img class="pointer" @click="$router.push('/user')" v-if="hasLogin" :src="userInfo.avatar || user">
           <span class="text">{{userInfo.name}}</span>
@@ -43,7 +56,9 @@ export default {
   },
   data() {
     return {
-      user
+      user,
+      value: '',
+      dataSource: []
     }
   },
   methods: {
@@ -55,6 +70,16 @@ export default {
     },
     toLogin(b) {
       b ? this.$router.push('/login?type=register') : this.$router.push('/login')
+    },
+    handleSearch() {
+      this.$api.getSearch({searchName: this.$refs.input.$children[0].$children[0].$children[0].$children[0].$children[0].$children[0].value}).then(res => {
+        this.dataSource = res.data
+      })
+    },
+    onSelect (e, option) {
+      console.log(e, option);
+      this.$router.push(`/post/${e}`)
+      // this.dataSource = []
     }
   }
 }
@@ -96,6 +121,20 @@ export default {
     .text {
       margin-right: 10px;
     }
+}
+.hint {
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 0;
+}
+.hot1 {
+  color: #fd434f;
+}
+.hot2 {
+  color: #ff9a02;
+}
+.hot3 {
+  color: #31a0ff;
 }
 </style>
 <style>

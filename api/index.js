@@ -1,52 +1,8 @@
-const api = {
-	passwordLogin: {
-		url: `/api/user/login`,
-		method: 'POST',
-	},
-	register: {
-		url: `/api/user/register`,
-		method: 'POST',
-	},
-	getPost: {
-		url: `/api/post/getPost`,
-		method: 'get',
-	},
-	getPostInfo: {
-		url: `/api/post/getPostInfo`,
-		method: 'get',
-	},
-	getUserInfo: {
-		url: `/api/user/userInfo`,
-		method: 'get',
-	},
-	editUserInfo: {
-		url: `/api/user/editUserInfo`,
-		method: 'POST',
-	},
-	support: {
-		url: `/api/post/support`,
-		method: 'POST',
-	},
-	upload: {
-		url: `/api/utils/upload`,
-		method: 'POST',
-		headers: { 'Content-Type': 'multipart/form-data' }
-	},
-	postPublish: {
-		url: `/api/user/post`,
-		method: 'POST',
-	},
-	getComment: {
-		url: `/api/post/getComment`,
-		method: 'get',
-	},
-	postComment: {
-		url: `/api/user/comment`,
-		method: 'POST',
-	},
-	postReply: {
-		url: `/api/user/reply`,
-		method: 'POST',
-	},
-}
+// webpack api require.context 读取目录下含有 Api.js 的所有文件
+const files = require.context('./', true, /\Api.js$/)
+let api = {}
+files.keys().forEach(key => {
+	const tmp = files(key)
+	api = {...api, ...tmp}
+})
 export default api

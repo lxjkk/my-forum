@@ -1,15 +1,19 @@
 <template>
+  <SideBar>
   <div class="index">
     <postItem v-for="item in postList" :key="item.id" :postInfo="item" />
     <postItem v-if="postCount > postList.length" loading/>
   </div>
+  </SideBar>
 </template>
 
 <script>
 import postItem from '~/components/postItem'
+import SideBar from '~/components/layout/SideBar'
 export default {
   components: {
-    postItem
+    postItem,
+    SideBar
   },
   async asyncData({$api}) {
     const res = await $api.getPost({page:1,limit:10})
@@ -55,5 +59,6 @@ export default {
 .index {
   background: #fff;
   margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgb(18 18 18 / 10%);
 }
 </style>
