@@ -1,4 +1,5 @@
 <template>
+<SideBar>
   <div class="post-main">
     <div class="content">
       <!-- 标题 -->
@@ -97,14 +98,17 @@
       </a-row>
     </div>
   </div>
+</SideBar>
 </template>
 
 <script>
 import moment from 'moment'
 import replyItem from '~/components/replyItem'
+import SideBar from '~/components/layout/SideBar'
 export default {
   components: {
-    replyItem
+    replyItem,
+    SideBar
   },
   async asyncData({ $api, route }) {
     // const res = await $api.getPostInfo({ id: route.params.id })

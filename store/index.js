@@ -2,7 +2,9 @@ import api from '~/api'
 import request from '~/utils/http'
 export const state = () => ({
     userInfo: {}, // 个人信息
-    hasLogin: false
+    hasLogin: false,
+    hotList: [],
+    recommendList: []
 })
 
 export const mutations = {
@@ -15,7 +17,10 @@ export const mutations = {
         state.userInfo = {};
         this.$cookies.remove('LC-Token')
     },
-
+    indexStore(state, data) {
+        state.hotList = data[0].code === 200 && data[0].data || []
+        state.recommendList = data[1].code === 200 && data[1].data || []
+    }
 }
 
 export const actions = {
