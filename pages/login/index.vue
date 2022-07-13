@@ -11,7 +11,7 @@
                     <a-input
                         size="large"
                         v-decorator="['userName', verifyAccount]"
-                        placeholder="请输入账号"
+                        placeholder="请输入邮箱"
                         autocomplete="off"
                     >
                         <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
@@ -36,15 +36,27 @@
         </div>
 
         <div v-else class="action">
-            <a-form :form="formLogin" class="login-form" @submit="handleSubmit">
-              <a-form-item>
+            <a-form :form="formRegister" class="login-form" @submit="handleSubmitRegister">
+                <a-form-item>
                     <a-input
                         size="large"
                         v-decorator="['userName', verifyAccount]"
-                        placeholder="请输入账号"
+                        placeholder="请输入邮箱"
                         autocomplete="off"
                     >
                         <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
+                    </a-input>
+                </a-form-item>
+                <a-form-item>
+                    <a-input
+                        size="large"
+                        v-decorator="['code', verifyCode]"
+                        placeholder="请输入验证码"
+                        autocomplete="off"
+                        ref="code"
+                    >
+                        <a-icon slot="prefix" type="key" style="color: rgba(0,0,0,.25)" />
+                        <span slot="addonAfter" @click="getCode">{{obj.count === 60 ? '获取验证码' : `${obj.count}S`}}</span>
                     </a-input>
                 </a-form-item>
                 <a-form-item>
@@ -78,6 +90,7 @@
 </template>
 
 <script>
+import md5 from 'js-md5';
 export default {
     layout: 'login',
     computed: {
@@ -88,35 +101,68 @@ export default {
     data() {
         return {
             verifyAccount: { rules: [{ required: true, message: '请输入账户!' }]},
+            verifyCode: { rules: [{ required: true, message: '请输入验证码!' }]},
             verifyPass: { rules: [{ required: true, message: '请输入密码!' }] },
             formLogin: this.$form.createForm(this, {name: 'horizontal_login'}),
             formRegister: this.$form.createForm(this, {name: 'horizontal_register'}),
+            obj: {
+                switch: false,
+                count: 60
+            }
         }
     },
     methods: {
+        getCode () {
+            // this.$api.getCode({})
+            if (this.obj.switch) return
+            const {userName} = this.formRegister.getFieldsValue()
+            this.$api.getCode({account: userName}).then(res => {
+                if (res.code === 200) {
+                    this.obj.switch = true
+                    this.countDown()
+                    this.$message.success(res.msg)
+                }
+            })
+        },
+        countDown() {
+            if (this.obj.count > 0) {
+                this.obj.count--
+                setTimeout(this.countDown, 1000)
+            } else {
+                this.obj.switch = false
+                this.obj.count = 60
+            }
+        },
         handleSubmit(e) {
             e.preventDefault();
             this.formLogin.validateFields((err, values) => {
                 if (!err) {
-                    console.log('获取: ', this.$api);
-                    if (!this.register) {
-                        this.$api.passwordLogin({email: values.userName, password: values.password}).then(res => {
-                            console.log(res)
-                            if (res.code === 200) {
-                                this.$message.success(res.msg)
-                                this.$store.commit('saveUserInfo', res.data)
-                                this.$router.push({path: '/'})
-                            }
-                        })
-                    } else {
-                        if (values.password !== values.passwordtwo) {
-                            this.$message.error('两次输入的密码不正确')
-                            return
+                    this.$api.passwordLogin({email: values.userName, password: md5(values.password)}).then(res => {
+                        console.log(res)
+                        if (res.code === 200) {
+                            this.$message.success(res.msg)
+                            this.$store.commit('saveUserInfo', res.data)
+                            this.$router.push({path: '/'})
                         }
-                        this.$api.register({email: values.userName, password: values.password}).then(res => {
-                            console.log(res)
-                        })
+                    })
+                }
+            });
+        },
+        handleSubmitRegister (e) {
+            e.preventDefault();
+            this.formRegister.validateFields((err, values) => {
+                if (!err) {
+                    if (values.password !== values.passwordtwo) {
+                        this.$message.error('两次输入的密码不正确')
+                        return
                     }
+                    this.$api.register({email: values.userName, password:  md5(values.password), code: values.code}).then(res => {
+                        console.log(res)
+                        if (res.code === 200) {
+                            this.$message.success(res.msg)
+                            this.$router.push({path: '/login'})
+                        }
+                    })
                 }
             });
         }
@@ -153,6 +199,16 @@ export default {
 
     .action {
         padding: 0 32px;
+    }
+}
+/deep/ .ant-input-group-addon {
+    padding: 0;
+    text-align: center;
+    span {
+        display: inline-block;
+        width: 92px;
+        line-height: 38px;
+        cursor: pointer;
     }
 }
 </style>

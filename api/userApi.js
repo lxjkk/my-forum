@@ -15,5 +15,9 @@ const data = {
 		url: `/api/user/editUserInfo`,
 		method: 'POST',
 	},
+	getCode: {
+		url: `/api/user/auth`,
+		method: 'POST',
+	},
 }
 export default data
