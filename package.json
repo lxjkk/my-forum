@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "cross-env ENV=dev BASE_URL=http://127.0.0.1:2000 nuxt",
     "build": "cross-env ENV=pro BASE_URL=http://192.168.3.138:2000 nuxt build",
+    "buildHw": "cross-env ENV=pro BASE_URL=http://back.rzcll.xyz nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
